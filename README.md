@@ -1,63 +1,63 @@
 # DeckSaga
 
-A Unity-based turn-based card game inspired by Slay the Spire. Features deck building, combat system, enemy AI, and an event-driven action system architecture.
+一款基于Unity的回合制卡牌游戏，灵感来源于杀戮尖塔。包含卡组构建、战斗系统、敌人AI以及事件驱动的行动系统架构。
 
-## Features
+## 特性
 
-- **Turn-Based Combat System** - Strategic card battles with mana management
-- **Event-Driven Architecture** - Flexible action system with pre/post reactions
-- **Card System** - Draw cards, play cards, discard pile management
-- **Enemy AI** - Multiple enemies with attack patterns
-- **Status Effects** - Burn mechanic and customizable status effects
-- **Target Modes** - Multiple targeting options (all enemies, random, hero)
+- **回合制战斗系统** - 策略性的卡牌对战，附带法力值管理
+- **事件驱动架构** - 灵活的行动系统，支持前置/后置反应
+- **卡牌系统** - 抽卡、出牌、弃牌堆管理
+- **敌人AI** - 多个敌人及攻击模式
+- **状态效果** - 燃烧机制和可自定义的状态效果
+- **目标模式** - 多种选择目标方式（全体敌人、随机、英雄）
 
-## Architecture
+## 架构
 
 ```
-Architecture: Event-Driven + Action System
+架构：事件驱动 + 行动系统
 
-Core Components:
-├── GameAction          - Base class for all game actions
-├── ActionSystem        - Manages action flow: Pre → Perform → Post
-├── Singleton<T>        - Base singleton for systems
-└── Systems            - CardSystem, EnemySystem, ManaSystem, etc.
+核心组件：
+├── GameAction          - 所有游戏行动的基类
+├── ActionSystem        - 管理行动流程：前置 → 执行 → 后置
+├── Singleton<T>        - 系统单例基类
+└── Systems            - 卡牌系统、敌人系统、法力系统等
 
-Patterns Used:
-• Event-Driven Architecture
-• Singleton Pattern
-• Factory Pattern
-• Command Pattern
+使用的设计模式：
+• 事件驱动架构
+• 单例模式
+• 工厂模式
+• 命令模式
 ```
 
-## Project Structure
+## 项目结构
 
 ```
 Assets/Scripts/
-├── General/          # Base components (Singleton, ActionSystem)
-├── Models/           # Data models (Card, Effect, TargetMode)
-├── Data/             # Data assets (CardData, HeroData, EnemyData)
-├── Systems/          # Core game systems
-├── GameActions/      # Game actions (PlayCard, DrawCards, etc.)
-├── Effects/          # Card effects (DealDamage, DrawCards, etc.)
-├── Views/            # UI views (CardView, HandView, HeroView)
-├── UI/               # UI components
-└── TargetModes/      # Target selection modes
+├── General/          # 基础组件（单例、行动系统）
+├── Models/           # 数据模型（卡牌、效果、目标模式）
+├── Data/             # 数据资源（卡牌数据、英雄数据、敌人数据）
+├── Systems/          # 核心游戏系统
+├── GameActions/      # 游戏行动（出牌、抽卡等）
+├── Effects/          # 卡牌效果（造成伤害、抽卡等）
+├── Views/            # 视图层（卡牌视图、手牌视图、英雄视图）
+├── UI/               # UI组件
+└── TargetModes/      # 目标选择模式
 ```
 
-## Tech Stack
+## 技术栈
 
-- **Engine**: Unity 2022+
+- **引擎**: Unity 2022+
 - **UI**: Unity UGUI + TextMesh Pro
-- **Animation**: DOTween
-- **Language**: C#
+- **动画**: DOTween
+- **语言**: C#
 
-## Getting Started
+## 快速开始
 
-1. Clone this repository
-2. Open the project in Unity (2022 or later)
-3. Open `Assets/Scenes/SampleScene.unity`
-4. Press Play to run the game
+1. 克隆此仓库
+2. 在Unity中打开项目（2022或更高版本）
+3. 打开 `Assets/Scenes/SampleScene.unity`
+4. 按下Play运行游戏
 
-## License
+## 许可证
 
 MIT
