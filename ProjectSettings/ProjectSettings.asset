@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:yousandi.cn,2023:
+%TAG !u! tag:unity3d.com,2011:
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
@@ -292,7 +292,7 @@ PlayerSettings:
   declareImmCBAsConst: 1
   clonedFromGUID: 10ad67313f4034357812315f3c407484
   templatePackageId: cn.tuanjie.template.2d@7.0.4
-  templateDefaultScene: Assets/Scenes/SampleScene.scene
+  templateDefaultScene: Assets/Scenes/SampleScene.unity
   useCustomMainManifest: 0
   useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 0

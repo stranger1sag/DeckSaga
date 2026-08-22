@@ -7,8 +7,6 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /[Mm]emoryCaptures/
-/[Pp]ackages/
-*.[Pp]ackage-lock.json
 
 # Plastic SCM (Unity Version Control)
 /.plastic/
@@ -31,5 +29,4 @@ Desktop.ini
 
 # Unity - keep scenes and assets but ignore local settings
 /[Aa]ssets/AssetStoreTools*
-ProjectSettings/EditorBuildSettings.asset
 ProjectSettings/TagManager.asset

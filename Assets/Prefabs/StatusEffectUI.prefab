@@ -1,18 +1,17 @@
 %YAML 1.1
-%TAG !u! tag:yousandi.cn,2023:
+%TAG !u! tag:unity3d.com,2011:
 --- !u!1 &3198709928665441172
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 7
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 962507562952253822}
   - component: {fileID: 7728183457070471639}
   - component: {fileID: 4911939949500579894}
   m_Layer: 0
-  m_HasEditorInfo: 1
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +66,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 99
-  m_enableAdvanceTextProcess: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -142,14 +140,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 7
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 6436650806956754175}
   - component: {fileID: 1845563582122995731}
   - component: {fileID: 4201863699295774585}
   - component: {fileID: 2007740750820179918}
   m_Layer: 0
-  m_HasEditorInfo: 1
   m_Name: StatusEffectUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +162,7 @@ RectTransform:
   m_GameObject: {fileID: 4348539928136985954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 962507562952253822}

@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:yousandi.cn,2023:
+%TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24,3 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d546f756d60bd294c8333eaf4c87bda4, type: 2}
   - {fileID: 11400000, guid: d546f756d60bd294c8333eaf4c87bda4, type: 2}
   - {fileID: 11400000, guid: 3245cf74a5dd8f94fb5e8950731b91a6, type: 2}
+  - {fileID: 11400000, guid: 4d19aa67436151115ebac7c91058b627, type: 2}
+  - {fileID: 11400000, guid: 4d19aa67436151115ebac7c91058b627, type: 2}
+  - {fileID: 11400000, guid: 124e74a5a00425e3d1136e2e2952cef5, type: 2}
+  - {fileID: 11400000, guid: 124e74a5a00425e3d1136e2e2952cef5, type: 2}
