@@ -30,4 +30,4 @@ MonoBehaviour:
       type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
       data:
         damageAmount: 3
-        hits: {hits}
+        hits: 2
