@@ -11,6 +11,7 @@ public class CardSystem : Singleton<CardSystem>
 
     private readonly List<Card> drawPile = new();
     private readonly List<Card> discardPile = new();
+    private readonly List<Card> exhaustPile = new();
     private readonly List<Card> hand = new();
     void OnEnable()
     {
@@ -64,9 +65,20 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator PlayCardPerformer(PlayCardGA playCardGA)
     {
-        hand.Remove(playCardGA.Card);
-        CardView cardView = handView.RemoveCard(playCardGA.Card);
-        yield return DiscardCard(cardView);
+        Card playedCard = playCardGA.Card;
+        hand.Remove(playedCard);
+        CardView cardView = handView.RemoveCard(playedCard);
+
+        // 保留 Retain：卡回到手上（仍然执行效果）；否则进弃牌堆/消耗堆
+        if(playedCard.Retain)
+        {
+            hand.Add(playedCard);
+            yield return handView.AddCard(cardView);
+        }
+        else
+        {
+            yield return DiscardCard(cardView, playedCard.Exhaust);
+        }
 
         // 出牌时英雄播放攻击动作（只在出牌时，而不是 Perk/道具伤害时）
         if(HeroSystem.Instance != null && HeroSystem.Instance.HeroView != null)
@@ -99,9 +111,10 @@ public class CardSystem : Singleton<CardSystem>
         drawPile.AddRange(discardPile);
         discardPile.Clear();
     }
-    private IEnumerator DiscardCard(CardView cardView)
+    private IEnumerator DiscardCard(CardView cardView, bool exhaust = false)
     {
-        discardPile.Add(cardView.Card);
+        if(exhaust) exhaustPile.Add(cardView.Card);
+        else discardPile.Add(cardView.Card);
         cardView.transform.DOScale(Vector3.zero,0.15f);
         Tween tween = cardView.transform.DOMove(discardPilePoint.position, 0.15f);
         yield return tween.WaitForCompletion();
