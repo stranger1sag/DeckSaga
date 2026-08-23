@@ -15,8 +15,8 @@ public class DamageSystem : MonoBehaviour
     }
     private IEnumerator DealDamagePerformer(DealDamageGA dealDamageGA)
     {
-        // 施法者为英雄时，出牌攻击播放攻击动画
-        if(dealDamageGA.Caster is HeroView heroCaster) heroCaster.PlayAttack();
+        // 攻击动画在出牌流程(PlayCardPerformer)触发；此处不再播 caster 攻击动画
+        // (避免反击/道具等以英雄为 caster 的伤害误播攻击动画)
         foreach(var target in dealDamageGA.Targets)
         {
             target.Damage(dealDamageGA.Amount);

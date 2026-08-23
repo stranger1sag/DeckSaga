@@ -67,7 +67,11 @@ public class CardSystem : Singleton<CardSystem>
         hand.Remove(playCardGA.Card);
         CardView cardView = handView.RemoveCard(playCardGA.Card);
         yield return DiscardCard(cardView);
-        
+
+        // 出牌时英雄播放攻击动作（只在出牌时，而不是 Perk/道具伤害时）
+        if(HeroSystem.Instance != null && HeroSystem.Instance.HeroView != null)
+            HeroSystem.Instance.HeroView.PlayAttack();
+
         SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
         ActionSystem.Instance.AddReaction(spendManaGA);
         if(playCardGA.Card.ManualTargetEffect != null)
