@@ -23,7 +23,8 @@ public class DamageSystem : MonoBehaviour
             CombatantView caster = dealDamageGA.Caster;
             if(caster != null)
             {
-                amount += caster.GetStatusEffectStacks(StatusEffectType.STRENGTH);
+                amount += caster.GetStatusEffectStacks(StatusEffectType.STRENGTH)
+                        + caster.GetStatusEffectStacks(StatusEffectType.FURY);
                 if(caster.GetStatusEffectStacks(StatusEffectType.WEAK) > 0)
                     amount = Mathf.RoundToInt(amount * 0.75f);
             }

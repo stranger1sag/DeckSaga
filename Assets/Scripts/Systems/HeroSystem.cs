@@ -27,6 +27,13 @@ public class HeroSystem : Singleton<HeroSystem>
 
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
+        // 回合末格挡清零（受护体 WARD 保护时不清）
+        int armor = HeroView.GetStatusEffectStacks(StatusEffectType.ARMOR);
+        if(armor > 0 && HeroView.GetStatusEffectStacks(StatusEffectType.WARD) <= 0)
+            HeroView.RemoveStatusEffect(StatusEffectType.ARMOR, armor);
+        // 回合末清掉「本回合」的怒气
+        int fury = HeroView.GetStatusEffectStacks(StatusEffectType.FURY);
+        if(fury > 0) HeroView.RemoveStatusEffect(StatusEffectType.FURY, fury);
         int burnStacks = HeroView.GetStatusEffectStacks(StatusEffectType.BURN);
         if(burnStacks > 0)
         {

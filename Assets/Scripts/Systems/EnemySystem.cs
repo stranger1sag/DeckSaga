@@ -43,6 +43,12 @@ public class EnemySystem : Singleton<EnemySystem>
                 ApplyBurnGA poisonGA = new(enemyView, PoisonStacks, StatusEffectType.POISON);
                 ActionSystem.Instance.AddReaction(poisonGA);
             }
+            // 眩晕：跳过本回合行动并减1层
+            if(enemyView.GetStatusEffectStacks(StatusEffectType.STUN) > 0)
+            {
+                enemyView.RemoveStatusEffect(StatusEffectType.STUN, 1);
+                continue;
+            }
             AttackHeroGA attackGA = new(enemyView);
             ActionSystem.Instance.AddReaction(attackGA);
         }
@@ -54,7 +60,13 @@ public class EnemySystem : Singleton<EnemySystem>
         Tween tween = attacker.transform.DOMoveX(attacker.transform.position.x - 1f, 0.15f);
         yield return tween.WaitForCompletion();
         attacker.transform.DOMoveX(attacker.transform.position.x + 1f, 0.15f);
-        DealDamageGA damageGA = new(attacker.AttackPower,new(){HeroSystem.Instance.HeroView},attackHeroGA.Caster);
+        // 枯竭：攻击力 - 层数（最少0）
+        int atkPower = Mathf.Max(0, attacker.AttackPower - attacker.GetStatusEffectStacks(StatusEffectType.DEPLETE));
+        // 嘲讽：有 TAUNT 的目标优先被攻击，否则攻击英雄
+        CombatantView target = HeroSystem.Instance.HeroView;
+        foreach (var cv in UnityEngine.Object.FindObjectsOfType<CombatantView>())
+            if (cv.GetStatusEffectStacks(StatusEffectType.TAUNT) > 0) { target = cv; break; }
+        DealDamageGA damageGA = new(atkPower,new(){target},attackHeroGA.Caster);
         ActionSystem.Instance.AddReaction(damageGA);
     }
     private IEnumerator KillEnemyPerformer(KillEnemyGA killEnemyGA)

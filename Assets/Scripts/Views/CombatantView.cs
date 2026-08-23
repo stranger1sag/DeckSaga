@@ -145,6 +145,8 @@ public class CombatantView : MonoBehaviour
 
     public void AddStatusEffect(StatusEffectType statusEffectType, int stackCount)
     {
+        // 敏捷：获得格挡时加层数
+        if(statusEffectType == StatusEffectType.ARMOR) stackCount += GetStatusEffectStacks(StatusEffectType.DEXTERITY);
         if(statusEffects.ContainsKey(statusEffectType))
         {
             statusEffects[statusEffectType] += stackCount;
