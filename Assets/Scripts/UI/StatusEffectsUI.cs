@@ -29,7 +29,7 @@ public class StatusEffectsUI : MonoBehaviour
                 statusEffectUIs.Add(type, statusEffectUI);
             }
             Sprite sprite = GetSpriteByType(type);
-            statusEffectUIs[type].Setup(sprite, stackCount);
+            statusEffectUIs[type].Setup(sprite, stackCount, GetColorByType(type));
         }
     }
     private Sprite GetSpriteByType(StatusEffectType type)
@@ -60,4 +60,28 @@ public class StatusEffectsUI : MonoBehaviour
         if(assigned != null) return assigned;
         return Resources.Load<Sprite>("status_icons/" + name);
     }
+    // 每种状态的图标颜色（白色图标 x 颜色 = 彩色）
+    private Color GetColorByType(StatusEffectType type)
+    {
+        return type switch
+        {
+            StatusEffectType.ARMOR => new Color(0.55f, 0.75f, 1f),        // 蓝(防御)
+            StatusEffectType.BURN => new Color(1f, 0.55f, 0.15f),         // 橙(燃烧)
+            StatusEffectType.STRENGTH => new Color(1f, 0.4f, 0.4f),       // 红(力量)
+            StatusEffectType.DEXTERITY => new Color(0.6f, 1f, 0.5f),      // 绿(敏捷)
+            StatusEffectType.THORNS => new Color(0.6f, 1f, 0.35f),        // 黄绿(荆棘)
+            StatusEffectType.LIFESTEAL => new Color(1f, 0.35f, 0.55f),    // 粉红(吸血)
+            StatusEffectType.FURY => new Color(1f, 0.7f, 0.25f),          // 橙黄(怒气)
+            StatusEffectType.WARD => new Color(0.4f, 0.6f, 1f),           // 深蓝(护体)
+            StatusEffectType.VULNERABLE => new Color(1f, 0.85f, 0.4f),    // 黄(易伤)
+            StatusEffectType.WEAK => new Color(0.7f, 0.7f, 0.7f),         // 灰(虚弱)
+            StatusEffectType.POISON => new Color(0.5f, 0.85f, 0.35f),     // 绿(中毒)
+            StatusEffectType.STUN => new Color(1f, 0.9f, 0.45f),          // 黄(眩晕)
+            StatusEffectType.TAUNT => new Color(1f, 0.45f, 0.3f),         // 红橙(嘲讽)
+            StatusEffectType.ARMOR_BREAK => new Color(1f, 0.6f, 0.35f),   // 橙(破甲)
+            StatusEffectType.DEPLETE => new Color(0.75f, 0.6f, 0.9f),     // 紫(枯竭)
+            _ => new Color(0.55f, 1f, 0.6f)                               // 绿(治疗)
+        };
+    }
 }
+
