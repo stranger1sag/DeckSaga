@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -70}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -3}
+  m_SizeDelta: {x: 0, y: -32}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2058883433548710272
 CanvasRenderer:
@@ -87,6 +87,20 @@ MonoBehaviour:
   statusEffectUIPrefab: {fileID: 1845563582122995731, guid: eb97832b255dac44489316846ea56fc7, type: 3}
   armorSprite: {fileID: 21300000, guid: dd61e497cfba70a218ef016f851ae7c9, type: 3}
   burnSprite: {fileID: 21300000, guid: 7619a8271e5d265fd8d67dbb7f804a47, type: 3}
+  strengthSprite: {fileID: 0}
+  dexteritySprite: {fileID: 0}
+  thornsSprite: {fileID: 0}
+  lifestealSprite: {fileID: 0}
+  furySprite: {fileID: 0}
+  wardSprite: {fileID: 0}
+  vulnerableSprite: {fileID: 0}
+  weakSprite: {fileID: 0}
+  poisonSprite: {fileID: 0}
+  stunSprite: {fileID: 0}
+  tauntSprite: {fileID: 0}
+  armorBreakSprite: {fileID: 0}
+  depleteSprite: {fileID: 0}
+  healSprite: {fileID: 0}
 --- !u!1 &2259177096737147900
 GameObject:
   m_ObjectHideFlags: 0

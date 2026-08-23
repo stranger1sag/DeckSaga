@@ -80,8 +80,8 @@ public class CardSystem : Singleton<CardSystem>
             yield return DiscardCard(cardView, playedCard.Exhaust);
         }
 
-        // 出牌时英雄播放攻击动作（只在出牌时，而不是 Perk/道具伤害时）
-        if(HeroSystem.Instance != null && HeroSystem.Instance.HeroView != null)
+        // 只有攻击牌(ATTACK)才让英雄播放攻击动作；技能/能力牌不播
+        if(playCardGA.Card.Type == CardType.ATTACK && HeroSystem.Instance != null && HeroSystem.Instance.HeroView != null)
             HeroSystem.Instance.HeroView.PlayAttack();
 
         SpendManaGA spendManaGA = new(playCardGA.Card.Mana);

@@ -771,7 +771,7 @@ MonoBehaviour:
   wrapper: {fileID: 4246442064375427713}
   dropLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
 --- !u!210 &6608338766039458959
 SortingGroup:
   m_ObjectHideFlags: 0
