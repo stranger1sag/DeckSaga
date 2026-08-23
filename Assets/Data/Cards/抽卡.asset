@@ -15,6 +15,9 @@ MonoBehaviour:
   <Description>k__BackingField: "\u62BD\u4E24\u5F20\u5361"
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  <CardType>k__BackingField: 1
+  <Exhaust>k__BackingField: 0
+  <Retain>k__BackingField: 0
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
