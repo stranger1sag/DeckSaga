@@ -6,6 +6,9 @@ public class StatusEffectsUI : MonoBehaviour
 {
     [SerializeField] private StatusEffectUI statusEffectUIPrefab;
     [SerializeField] private Sprite armorSprite, burnSprite;
+    [SerializeField] private Sprite strengthSprite, dexteritySprite, thornsSprite, lifestealSprite, furySprite, wardSprite;
+    [SerializeField] private Sprite vulnerableSprite, weakSprite, poisonSprite, stunSprite, tauntSprite, armorBreakSprite, depleteSprite;
+    [SerializeField] private Sprite healSprite;
     private Dictionary<StatusEffectType, StatusEffectUI> statusEffectUIs = new();
     public void UpdateStatusEffectUI(StatusEffectType type, int stackCount)
     {
@@ -31,12 +34,30 @@ public class StatusEffectsUI : MonoBehaviour
     }
     private Sprite GetSpriteByType(StatusEffectType type)
     {
-        return type switch
+        switch(type)
         {
-            StatusEffectType.ARMOR => armorSprite,
-            StatusEffectType.BURN => burnSprite,
-            // 新状态效果：暂无独立图标，先用 burnSprite 顶替，后续补
-            _ => burnSprite
-        };
+            case StatusEffectType.ARMOR: return ResolveIcon(armorSprite, "armor");
+            case StatusEffectType.BURN: return ResolveIcon(burnSprite, "burn");
+            case StatusEffectType.STRENGTH: return ResolveIcon(strengthSprite, "strength");
+            case StatusEffectType.DEXTERITY: return ResolveIcon(dexteritySprite, "dexterity");
+            case StatusEffectType.THORNS: return ResolveIcon(thornsSprite, "thorns");
+            case StatusEffectType.LIFESTEAL: return ResolveIcon(lifestealSprite, "lifesteal");
+            case StatusEffectType.FURY: return ResolveIcon(furySprite, "energy");
+            case StatusEffectType.WARD: return ResolveIcon(wardSprite, "ward");
+            case StatusEffectType.VULNERABLE: return ResolveIcon(vulnerableSprite, "vulnerable");
+            case StatusEffectType.WEAK: return ResolveIcon(weakSprite, "weak");
+            case StatusEffectType.POISON: return ResolveIcon(poisonSprite, "poison");
+            case StatusEffectType.STUN: return ResolveIcon(stunSprite, "stun");
+            case StatusEffectType.TAUNT: return ResolveIcon(tauntSprite, "taunt");
+            case StatusEffectType.ARMOR_BREAK: return ResolveIcon(armorBreakSprite, "armor_break");
+            case StatusEffectType.DEPLETE: return ResolveIcon(depleteSprite, "deplete");
+            default: return ResolveIcon(healSprite, "heal");
+        }
+    }
+    // 字段未赋值时用 Resources.Load 兜底（运行时也能拿到图标）
+    private Sprite ResolveIcon(Sprite assigned, string name)
+    {
+        if(assigned != null) return assigned;
+        return Resources.Load<Sprite>("status_icons/" + name);
     }
 }

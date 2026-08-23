@@ -85,8 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffectUIPrefab: {fileID: 1845563582122995731, guid: eb97832b255dac44489316846ea56fc7, type: 3}
-  armorSprite: {fileID: 21300000, guid: fe89f6773c1f6e64989de2def2896610, type: 3}
-  burnSprite: {fileID: 21300000, guid: 4c7f32beefcda0e41ad6acf9fb33aab4, type: 3}
+  armorSprite: {fileID: 21300000, guid: dd61e497cfba70a218ef016f851ae7c9, type: 3}
+  burnSprite: {fileID: 21300000, guid: 7619a8271e5d265fd8d67dbb7f804a47, type: 3}
 --- !u!1 &2259177096737147900
 GameObject:
   m_ObjectHideFlags: 0
