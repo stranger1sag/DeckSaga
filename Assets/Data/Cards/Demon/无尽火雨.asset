@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
+  m_Name: "\u65E0\u5C3D\u706B\u96E8"
+  m_EditorClassIdentifier: 
+  <Description>k__BackingField: "\u9020\u6210 2\xD7(\u5168\u573A\u71C3\u70E7) \u70B9\u4F24\u5BB3\u3002"
+  <Mana>k__BackingField: 2
+  <Image>k__BackingField: {fileID: 0}
+  <CardType>k__BackingField: 0
+  <Exhaust>k__BackingField: 0
+  <Retain>k__BackingField: 0
+  <ManualTargetEffect>k__BackingField:
+    rid: -2
+  <OtherEffects>k__BackingField:
+  - rid: 7579569710059225466
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7579569710059225466
+      type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
+      data:
+        <Effect>k__BackingField:
+          rid: 7579569710059225467
+        <TargetMode>k__BackingField:
+          rid: 7579569710059225468
+    - rid: 7579569710059225467
+      type: {class: BurnScaledDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        baseDamage: 0
+        burnMult: 2
+    - rid: 7579569710059225468
+      type: {class: AllEnemiesTM, ns: , asm: Assembly-CSharp}
+      data: 

@@ -8,10 +8,21 @@ public class BurnSystem : MonoBehaviour
     void OnEnable()
     {
         ActionSystem.AttachPerformer<ApplyBurnGA>(ApplyBurnPerformer);
+        ActionSystem.AttachPerformer<ClearBurnGA>(ClearBurnPerformer);
     }
     void OnDisable()
     {
         ActionSystem.DetachPerformer<ApplyBurnGA>();
+        ActionSystem.DetachPerformer<ClearBurnGA>();
+    }
+    private IEnumerator ClearBurnPerformer(ClearBurnGA clearBurnGA)
+    {
+        foreach(var target in clearBurnGA.Targets)
+        {
+            int burn = target.GetStatusEffectStacks(StatusEffectType.BURN);
+            if(burn > 0) target.RemoveStatusEffect(StatusEffectType.BURN, burn);
+        }
+        yield return null;
     }
     private IEnumerator ApplyBurnPerformer(ApplyBurnGA applyBurnGA)
     {

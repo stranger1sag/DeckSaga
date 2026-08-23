@@ -8,10 +8,29 @@ public class DamageSystem : MonoBehaviour
     void OnEnable()
     {
         ActionSystem.AttachPerformer<DealDamageGA>(DealDamagePerformer);
+        ActionSystem.AttachPerformer<ExecuteGA>(ExecutePerformer);
     }
     void OnDisable()
     {
         ActionSystem.DetachPerformer<DealDamageGA>(  );
+        ActionSystem.DetachPerformer<ExecuteGA>(  );
+    }
+    private IEnumerator ExecutePerformer(ExecuteGA executeGA)
+    {
+        // 处决：目标生命<=阈值 直接斩杀，否则按伤害管线结算
+        foreach(var target in executeGA.Targets)
+        {
+            if(target is EnemyView ev && target.CurrentHealth <= executeGA.Threshold)
+            {
+                ActionSystem.Instance.AddReaction(new KillEnemyGA(ev));
+            }
+            else
+            {
+                ActionSystem.Instance.AddReaction(new DealDamageGA(executeGA.BaseDamage,
+                    new List<CombatantView>{target}, executeGA.Caster));
+            }
+        }
+        yield return null;
     }
     private IEnumerator DealDamagePerformer(DealDamageGA dealDamageGA)
     {

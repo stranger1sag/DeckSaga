@@ -10,6 +10,8 @@ public static class DeckContent
     const string Common = "Assets/Data/Cards/Common";
     const string Soldier = "Assets/Data/Cards/Soldier";
     const string Orc = "Assets/Data/Cards/Orc";
+    const string Blood = "Assets/Data/Cards/Blood";
+    const string Demon = "Assets/Data/Cards/Demon";
 
     [MenuItem("Tools/DeckSaga/Build Common Pool")]
     public static void BuildCommon()
@@ -109,5 +111,101 @@ public static class DeckContent
             new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.PER_TURN_STRENGTH,1), DeckBuilder.Hero) });
         AssetDatabase.SaveAssets();
         Debug.Log("[DeckBuilder] Orc 池构建完成");
+    }
+
+    [MenuItem("Tools/DeckSaga/Build Blood Deck")]
+    public static void BuildBlood()
+    {
+        // §3.3 嗜血者（不含重复的公共6张）
+        DeckBuilder.Build("血袭", 1, CardType.ATTACK, "造成 6 点伤害，回复 3 点生命。", Blood,
+            DeckBuilder.Deal(6), new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(3), DeckBuilder.Hero) });
+        DeckBuilder.Build("血潮", 2, CardType.ATTACK, "造成 8 点伤害，回复 6 点生命。", Blood,
+            DeckBuilder.Deal(8), new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(6), DeckBuilder.Hero) });
+        DeckBuilder.Build("生命虹吸", 2, CardType.ATTACK, "对所有敌人造成 5 点伤害，按敌数回复生命。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Deal(5), DeckBuilder.AllEnemies), (DeckBuilder.Heal(3), DeckBuilder.Hero) });
+        DeckBuilder.Build("凝血", 1, CardType.SKILL, "获得 6 点格挡，回复 2 点生命。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.ARMOR,6), DeckBuilder.Hero), (DeckBuilder.Heal(2), DeckBuilder.Hero) });
+        DeckBuilder.Build("毒刃", 1, CardType.ATTACK, "造成 4 点伤害，施 2 层中毒。", Blood,
+            DeckBuilder.Deal(4), new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.POISON,2), DeckBuilder.RandomEnemy) });
+        DeckBuilder.Build("剧毒", 1, CardType.SKILL, "施 3 层中毒。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.POISON,3), DeckBuilder.RandomEnemy) });
+        DeckBuilder.Build("毒性爆发", 2, CardType.SKILL, "对所有敌人施 5 层中毒。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.POISON,5), DeckBuilder.AllEnemies) });
+        DeckBuilder.Build("血祭", 1, CardType.SKILL, "损失 4 点生命，抽 2 张牌。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Sacrifice(4), DeckBuilder.Hero), (DeckBuilder.Draw(2), DeckBuilder.None) });
+        DeckBuilder.Build("血之献祭", 2, CardType.SKILL, "损失 6 点生命，获得 2 点能量。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Sacrifice(6), DeckBuilder.Hero), (DeckBuilder.Mana(2), DeckBuilder.None) });
+        DeckBuilder.Build("放血", 1, CardType.SKILL, "损失 5 点生命，抽 3 张牌。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Sacrifice(5), DeckBuilder.Hero), (DeckBuilder.Draw(3), DeckBuilder.None) });
+        DeckBuilder.Build("吸血本能", 1, CardType.ATTACK, "造成 4 点伤害，回复 2 点生命。", Blood,
+            DeckBuilder.Deal(4), new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(2), DeckBuilder.Hero) });
+        DeckBuilder.Build("濒死爆发", 2, CardType.ATTACK, "造成 6 点伤害；自身生命<50% 时 +10。", Blood,
+            DeckBuilder.Cond(6, 10, ConditionalDamageEffect.Condition.CASTER_HP_PCT_LOW, 50));
+        DeckBuilder.Build("血之渴望", 1, CardType.ATTACK, "造成 5 点伤害，回复 2 点生命。", Blood,
+            DeckBuilder.Deal(5), new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(2), DeckBuilder.Hero) });
+        DeckBuilder.Build("血之屏障", 1, CardType.SKILL, "获得 5 点格挡，回复 1 点生命。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.ARMOR,5), DeckBuilder.Hero), (DeckBuilder.Heal(1), DeckBuilder.Hero) });
+        DeckBuilder.Build("血色祈祷", 2, CardType.SKILL, "回复 7 点生命。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(7), DeckBuilder.Hero) });
+        DeckBuilder.Build("血族之躯", 1, CardType.SKILL, "回复 5 点生命，获得 1 点力量。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(5), DeckBuilder.Hero), (DeckBuilder.Status(StatusEffectType.STRENGTH,1), DeckBuilder.Hero) });
+        DeckBuilder.Build("血勇", 1, CardType.ATTACK, "造成 6 点伤害。", Blood, DeckBuilder.Deal(6));
+        DeckBuilder.Build("终极吸食", 2, CardType.ATTACK, "造成 10 点伤害，回复等量生命（消耗）。", Blood,
+            DeckBuilder.Deal(10), new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(10), DeckBuilder.Hero) }, exhaust: true);
+        DeckBuilder.Build("血之契约", 2, CardType.POWER, "本场每次命中敌人额外 +1 吸血。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.EXTRA_LIFESTEAL,1), DeckBuilder.Hero) });
+        AssetDatabase.SaveAssets();
+        Debug.Log("[DeckBuilder] Blood 池构建完成");
+    }
+
+    [MenuItem("Tools/DeckSaga/Build Demon Deck")]
+    public static void BuildDemon()
+    {
+        // §3.4 深渊恶魔（不含重复的公共6张）
+        DeckBuilder.Build("烈焰术", 1, CardType.ATTACK, "造成 6 点伤害，施 2 层燃烧。", Demon,
+            DeckBuilder.Deal(6), new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.BURN,2), DeckBuilder.RandomEnemy) });
+        DeckBuilder.Build("火种", 1, CardType.SKILL, "施 2 层燃烧，抽 1 张牌。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.BURN,2), DeckBuilder.RandomEnemy), (DeckBuilder.Draw(1), DeckBuilder.None) });
+        DeckBuilder.Build("余烬", 0, CardType.SKILL, "施 1 层燃烧。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.BURN,1), DeckBuilder.RandomEnemy) });
+        DeckBuilder.Build("燎原", 2, CardType.ATTACK, "造成 3 点伤害，施 3 层燃烧。", Demon,
+            DeckBuilder.Deal(3), new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.BURN,3), DeckBuilder.RandomEnemy) });
+        DeckBuilder.Build("燃烧殆尽", 2, CardType.SKILL, "对所有敌人施 4 层燃烧。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.BURN,4), DeckBuilder.AllEnemies) });
+        DeckBuilder.Build("虚弱诅咒", 1, CardType.SKILL, "使目标虚弱 1。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.WEAK,1), DeckBuilder.RandomEnemy) });
+        DeckBuilder.Build("破势一击", 1, CardType.ATTACK, "造成 5 点伤害，无视格挡。", Demon, DeckBuilder.Deal(5, 1, true));
+        DeckBuilder.Build("处决", 2, CardType.ATTACK, "目标生命<20 直接斩杀，否则造成 8 点伤害。", Demon,
+            DeckBuilder.Execute(8, 20));
+        DeckBuilder.Build("刀刃", 2, CardType.ATTACK, "目标生命<30 直接斩杀。", Demon,
+            DeckBuilder.Execute(0, 30));
+        DeckBuilder.Build("火球术", 1, CardType.ATTACK, "造成 7 点伤害。", Demon, DeckBuilder.Deal(7));
+        DeckBuilder.Build("连珠火", 1, CardType.ATTACK, "造成 3×2 点伤害。", Demon, DeckBuilder.Deal(3, 2));
+        DeckBuilder.Build("灰烬风暴", 2, CardType.ATTACK, "对所有敌人造成 4 点伤害。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Deal(4), DeckBuilder.AllEnemies) });
+        DeckBuilder.Build("抽牌火", 1, CardType.SKILL, "抽 2 张牌。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Draw(2), DeckBuilder.None) });
+        DeckBuilder.Build("火之护盾", 1, CardType.SKILL, "获得 5 点格挡，施 2 层燃烧。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.ARMOR,5), DeckBuilder.Hero), (DeckBuilder.Status(StatusEffectType.BURN,2), DeckBuilder.RandomEnemy) });
+        DeckBuilder.Build("灼热核心", 1, CardType.ATTACK, "造成 6 点伤害；目标燃烧>2 时 +6。", Demon,
+            DeckBuilder.Cond(6, 6, ConditionalDamageEffect.Condition.TARGET_BURN_GT, 2));
+        DeckBuilder.Build("熔岩护体", 1, CardType.SKILL, "获得 4 点格挡。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.ARMOR,4), DeckBuilder.Hero) });
+        DeckBuilder.Build("恶魔之翼", 1, CardType.ATTACK, "造成 6 点伤害。", Demon, DeckBuilder.Deal(6));
+        DeckBuilder.Build("火焰补益", 1, CardType.SKILL, "回复 3 点生命，抽 1 张牌。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(3), DeckBuilder.Hero), (DeckBuilder.Draw(1), DeckBuilder.None) });
+        DeckBuilder.Build("咒能过载", 1, CardType.SKILL, "获得 1 点能量，损失 2 点生命。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Mana(1), DeckBuilder.None), (DeckBuilder.Sacrifice(2), DeckBuilder.Hero) });
+        DeckBuilder.Build("灼烧血脉", 1, CardType.SKILL, "获得 1 点力量。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.STRENGTH,1), DeckBuilder.Hero) });
+        DeckBuilder.Build("火刑", 2, CardType.ATTACK, "造成 8 点伤害；目标燃烧叠3 时斩杀。", Demon, DeckBuilder.Deal(8));
+        DeckBuilder.Build("焚尽", 3, CardType.SKILL, "对所有敌人造成 16 点伤害，清空燃烧层数。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Deal(16), DeckBuilder.AllEnemies), (DeckBuilder.ClearBurn(), DeckBuilder.AllEnemies) });
+        DeckBuilder.Build("无尽火雨", 2, CardType.ATTACK, "造成 2×(全场燃烧) 点伤害。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.BurnScaled(0, 2), DeckBuilder.AllEnemies) });
+        DeckBuilder.Build("灼热流转", 2, CardType.POWER, "本场每回合开始给所有敌人 +1 燃烧。", Demon,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.PER_TURN_BURN,1), DeckBuilder.Hero) });
+        AssetDatabase.SaveAssets();
+        Debug.Log("[DeckBuilder] Demon 池构建完成");
     }
 }

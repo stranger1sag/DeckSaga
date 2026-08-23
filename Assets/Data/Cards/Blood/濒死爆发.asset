@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
+  m_Name: "\u6FD2\u6B7B\u7206\u53D1"
+  m_EditorClassIdentifier: 
+  <Description>k__BackingField: "\u9020\u6210 6 \u70B9\u4F24\u5BB3\uFF1B\u81EA\u8EAB\u751F\u547D<50%
+    \u65F6 +10\u3002"
+  <Mana>k__BackingField: 2
+  <Image>k__BackingField: {fileID: 0}
+  <CardType>k__BackingField: 0
+  <Exhaust>k__BackingField: 0
+  <Retain>k__BackingField: 0
+  <ManualTargetEffect>k__BackingField:
+    rid: 7579569710059225371
+  <OtherEffects>k__BackingField: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 7579569710059225371
+      type: {class: ConditionalDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        baseDamage: 6
+        bonusDamage: 10
+        condition: 3
+        threshold: 50

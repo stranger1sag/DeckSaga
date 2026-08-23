@@ -43,6 +43,10 @@ public static class DeckBuilder
     public static SacrificeEffect Sacrifice(int n) { var e = new SacrificeEffect(); CardBuilder.SetEffectField(e, "sacrificeAmount", n); return e; }
     public static CostReductionEffect Cost(int n) { var e = new CostReductionEffect(); CardBuilder.SetEffectField(e, "reduction", n); return e; }
     public static RemoveDebuffEffect RemoveDebuff() { return new RemoveDebuffEffect(); }
+    public static ExecuteEffect Execute(int baseDamage, int threshold) { var e = new ExecuteEffect(); CardBuilder.SetEffectField(e, "baseDamage", baseDamage); CardBuilder.SetEffectField(e, "executeThreshold", threshold); return e; }
+    public static ConditionalDamageEffect Cond(int baseDamage, int bonus, ConditionalDamageEffect.Condition cond, int threshold) { var e = new ConditionalDamageEffect(); CardBuilder.SetEffectField(e, "baseDamage", baseDamage); CardBuilder.SetEffectField(e, "bonusDamage", bonus); CardBuilder.SetEffectField(e, "condition", cond); CardBuilder.SetEffectField(e, "threshold", threshold); return e; }
+    public static BurnScaledDamageEffect BurnScaled(int baseDamage, float burnMult) { var e = new BurnScaledDamageEffect(); CardBuilder.SetEffectField(e, "baseDamage", baseDamage); CardBuilder.SetEffectField(e, "burnMult", burnMult); return e; }
+    public static ClearBurnEffect ClearBurn() { return new ClearBurnEffect(); }
 
     // ===== 目标模式 =====
     public static readonly AllEnemiesTM AllEnemies = new();

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
+  m_Name: "\u706B\u79CD"
+  m_EditorClassIdentifier: 
+  <Description>k__BackingField: "\u65BD 2 \u5C42\u71C3\u70E7\uFF0C\u62BD 1 \u5F20\u724C\u3002"
+  <Mana>k__BackingField: 1
+  <Image>k__BackingField: {fileID: 0}
+  <CardType>k__BackingField: 1
+  <Exhaust>k__BackingField: 0
+  <Retain>k__BackingField: 0
+  <ManualTargetEffect>k__BackingField:
+    rid: -2
+  <OtherEffects>k__BackingField:
+  - rid: 7579569710059225403
+  - rid: 7579569710059225406
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7579569710059225403
+      type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
+      data:
+        <Effect>k__BackingField:
+          rid: 7579569710059225404
+        <TargetMode>k__BackingField:
+          rid: 7579569710059225405
+    - rid: 7579569710059225404
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 1
+        StackCount: 2
+    - rid: 7579569710059225405
+      type: {class: RandomEnemyTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 7579569710059225406
+      type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
+      data:
+        <Effect>k__BackingField:
+          rid: 7579569710059225407
+        <TargetMode>k__BackingField:
+          rid: 7579569710059225408
+    - rid: 7579569710059225407
+      type: {class: DrawCardsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        drawAmount: 1
+    - rid: 7579569710059225408
+      type: {class: NoTM, ns: , asm: Assembly-CSharp}
+      data: 
