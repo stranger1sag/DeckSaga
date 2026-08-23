@@ -23,4 +23,6 @@ public enum StatusEffectType
     TAUNT,          // 嘲讽：强制敌人攻击该目标
     ARMOR_BREAK,    // 破甲：无视格挡/削格挡
     DEPLETE,        // 枯竭：攻击力 -1/层(叠加)
+    ON_PLAY_ARMOR,        // 出牌光环：每打出任意一张牌获得X护甲
+    ON_ATTACK_PLAY_ARMOR, // 出牌光环：每打出一张攻击牌获得X护甲
 }

@@ -31,9 +31,13 @@ public class HeroSystem : Singleton<HeroSystem>
         int armor = HeroView.GetStatusEffectStacks(StatusEffectType.ARMOR);
         if(armor > 0 && HeroView.GetStatusEffectStacks(StatusEffectType.WARD) <= 0)
             HeroView.RemoveStatusEffect(StatusEffectType.ARMOR, armor);
-        // 回合末清掉「本回合」的怒气
+        // 回合末清掉「本回合」的怒气 + 出牌光环
         int fury = HeroView.GetStatusEffectStacks(StatusEffectType.FURY);
         if(fury > 0) HeroView.RemoveStatusEffect(StatusEffectType.FURY, fury);
+        foreach (var turnBuff in new StatusEffectType[]{StatusEffectType.ON_PLAY_ARMOR, StatusEffectType.ON_ATTACK_PLAY_ARMOR}) {
+            int s = HeroView.GetStatusEffectStacks(turnBuff);
+            if(s > 0) HeroView.RemoveStatusEffect(turnBuff, s);
+        }
         int burnStacks = HeroView.GetStatusEffectStacks(StatusEffectType.BURN);
         if(burnStacks > 0)
         {

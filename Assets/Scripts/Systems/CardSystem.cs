@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CardSystem : Singleton<CardSystem>
 {
+    // 出牌事件：一张牌被打出时触发（供"出牌光环"类效果响应）
+    public static event System.Action<Card, CombatantView> OnCardPlayed;
     [SerializeField] private HandView handView;
     [SerializeField] private Transform drawPilePoint;
     [SerializeField] private Transform discardPilePoint;
@@ -83,6 +85,10 @@ public class CardSystem : Singleton<CardSystem>
         // 只有攻击牌(ATTACK)才让英雄播放攻击动作；技能/能力牌不播
         if(playCardGA.Card.Type == CardType.ATTACK && HeroSystem.Instance != null && HeroSystem.Instance.HeroView != null)
             HeroSystem.Instance.HeroView.PlayAttack();
+
+        // 触发出牌事件（出牌光环效果响应）
+        if(OnCardPlayed != null && HeroSystem.Instance != null && HeroSystem.Instance.HeroView != null)
+            OnCardPlayed(playedCard, HeroSystem.Instance.HeroView);
 
         SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
         ActionSystem.Instance.AddReaction(spendManaGA);
