@@ -18,11 +18,11 @@ public class EnemyView : CombatantView
     {
         attackText.text = "ATK: " + AttackPower.ToString();
     }
-    // 怪物受伤：闪白一下（SpriteRenderer 颜色提到白再回原色）。英雄有 Hurt 动画不走这里
+    // 怪物受伤：闪白（_Flash 0->1->0，向白提亮）。英雄有 Hurt 动画不走这里
     protected override void OnDamaged()
     {
         SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
         if(sr != null)
-            sr.DOColor(Color.white, 0.08f).SetLoops(2, LoopType.Yoyo);
+            sr.material.DOFloat(1f, "_Flash", 0.08f).SetLoops(2, LoopType.Yoyo);
     }
 }
