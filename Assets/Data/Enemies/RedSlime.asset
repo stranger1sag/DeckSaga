@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RedSlime
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 26
-  <Image>k__BackingField: {fileID: 21300000, guid: bd178977605d92644976567d064549db, type: 3}
+  <Image>k__BackingField: {fileID: 1778516910664582627, guid: 0035092b44d941e658b467578227a020, type: 3}
   <AttackPower>k__BackingField: 6

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 15
-  <Image>k__BackingField: {fileID: 21300000, guid: 54768b0341f0e294bb68c8fda442d8ea, type: 3}
+  <Image>k__BackingField: {fileID: 1778516910664582627, guid: 0035092b44d941e658b467578227a020, type: 3}
   <AttackPower>k__BackingField: 4
