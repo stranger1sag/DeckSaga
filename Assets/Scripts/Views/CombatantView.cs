@@ -34,11 +34,29 @@ public class CombatantView : MonoBehaviour
         MaxHealth = CurrentHealth = health;
         spriteRenderer.sprite = image;
         ResolveHealthBar();
-        // 宽度与角色贴图世界宽度一致（不硬编码，按实际算）
+        // 宽度与角色实际可视宽度一致（用紧致alpha宽度去掉透明空白，避免Sprite外围空白把血条撑宽）
         if(spriteRenderer != null && spriteRenderer.sprite != null)
-            hpBarWidth = spriteRenderer.sprite.bounds.size.x * spriteRenderer.transform.lossyScale.x;
+            hpBarWidth = GetTightWidth(spriteRenderer.sprite) * spriteRenderer.transform.lossyScale.x;
         LayoutHealthBar();
         UpdateHealthUi();
+    }
+
+    // 计算精灵的紧致alpha宽度（去掉透明空白），返回该帧在世界@scale1的宽度；不可读则退回 bounds
+    private static float GetTightWidth(Sprite sprite)
+    {
+        Texture2D tex = sprite.texture;
+        if(tex == null || !tex.isReadable) return sprite.bounds.size.x;
+        Rect r = sprite.rect;
+        int w = Mathf.Clamp((int)r.width, 1, 2048);
+        int h = Mathf.Clamp((int)r.height, 1, 2048);
+        var px = tex.GetPixels((int)r.x, (int)r.y, w, h);
+        int minx = w, maxx = -1;
+        for(int y = 0; y < h; y++)
+            for(int x = 0; x < w; x++)
+                if(px[y * w + x].a > 0.05f) { if(x < minx) minx = x; if(x > maxx) maxx = x; }
+        if(maxx < 0) return sprite.bounds.size.x;
+        float tight = (maxx - minx + 1) / sprite.pixelsPerUnit;
+        return tight > 0 ? tight : sprite.bounds.size.x;
     }
 
     // 解析血条引用；未连线时按子级名称 HPBarBG / HPBarFill 查找
