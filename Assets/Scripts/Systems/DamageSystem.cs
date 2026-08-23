@@ -15,6 +15,8 @@ public class DamageSystem : MonoBehaviour
     }
     private IEnumerator DealDamagePerformer(DealDamageGA dealDamageGA)
     {
+        // 施法者(英雄)出牌攻击时播放攻击动画
+        if(dealDamageGA.Caster != null) dealDamageGA.Caster.PlayAttack();
         foreach(var target in dealDamageGA.Targets)
         {
             target.Damage(dealDamageGA.Amount);

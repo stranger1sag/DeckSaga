@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
@@ -25,6 +26,9 @@ public class CombatantView : MonoBehaviour
     public int MaxHealth {get; private set;}
     public int CurrentHealth {get; private set;}
     private readonly Dictionary<StatusEffectType,int> statusEffects = new();
+
+    // 角色动画（挂在 sprite 的 GameObject 上，由 controller 播放 Idle/Walk/Attack/Hurt/Death）
+    private Animator animator;
 
     protected void SetupBase(int health, Sprite image)
     {
@@ -70,6 +74,20 @@ public class CombatantView : MonoBehaviour
         if(hpBarFill != null) hpBarFill.fillAmount = ratio;
     }
 
+    // 播放指定动画状态（Idle/Walk/Attack/Hurt/Death）；无 Animator 时忽略
+    public void PlayAnimation(string stateName, float normalizedTime = 0f)
+    {
+        if(animator == null && spriteRenderer != null) animator = spriteRenderer.GetComponent<Animator>();
+        if(animator != null) animator.Play(stateName, 0, normalizedTime);
+    }
+
+    // 施法(攻击)动画：播 Attack，结束后回 Idle
+    public void PlayAttack()
+    {
+        PlayAnimation("Attack");
+        StartCoroutine(ReturnToIdle());
+    }
+
     public void Damage(int damageAmount)
     {
         int remainingDamage = damageAmount;
@@ -91,6 +109,15 @@ public class CombatantView : MonoBehaviour
         if(CurrentHealth < 0) CurrentHealth = 0;
         transform.DOShakePosition(0.2f,0.5f);
         UpdateHealthUi();
+        // 动画：死亡显示 Death，否则显示 Hurt 后回 Idle
+        if(CurrentHealth <= 0) PlayAnimation("Death");
+        else { PlayAnimation("Hurt"); StartCoroutine(ReturnToIdle()); }
+    }
+
+    private IEnumerator ReturnToIdle()
+    {
+        yield return new WaitForSeconds(0.45f);
+        if(CurrentHealth > 0) PlayAnimation("Idle");
     }
     public void AddStatusEffect(StatusEffectType statusEffectType, int stackCount)
     {

@@ -6,12 +6,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 7
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 2417015346219665867}
   - component: {fileID: 470223718208295518}
   m_Layer: 0
-  m_HasEditorInfo: 1
   m_Name: HeroView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,6 +48,8 @@ MonoBehaviour:
   healthText: {fileID: 5362503736368440229}
   spriteRenderer: {fileID: 7751097283346505965}
   statusEffectsUI: {fileID: 4304059532751823524}
+  hpBarBackground: {fileID: 0}
+  hpBarFill: {fileID: 0}
 --- !u!1001 &5016108794399744500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,13 +125,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8386933847003913904, guid: 9d36f22cc60fa4442948f150877150b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 108858456178293054}
   m_SourcePrefab: {fileID: 100100000, guid: 9d36f22cc60fa4442948f150877150b0, type: 3}
 --- !u!4 &2035274789767020616 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6458852343595655612, guid: 9d36f22cc60fa4442948f150877150b0, type: 3}
   m_PrefabInstance: {fileID: 5016108794399744500}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3600790332875652932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8386933847003913904, guid: 9d36f22cc60fa4442948f150877150b0, type: 3}
+  m_PrefabInstance: {fileID: 5016108794399744500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &108858456178293054
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3600790332875652932}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8a5b8d620b0367e94bd4e5c57791f2ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4304059532751823524 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9090475202040988496, guid: 9d36f22cc60fa4442948f150877150b0, type: 3}
