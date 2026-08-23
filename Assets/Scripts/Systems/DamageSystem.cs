@@ -34,13 +34,15 @@ public class DamageSystem : MonoBehaviour
                 if(target.GetStatusEffectStacks(StatusEffectType.VULNERABLE) > 0)
                     amount = Mathf.RoundToInt(amount * 1.5f);
                 if(amount < 0) amount = 0;
-                target.Damage(amount);
+                target.Damage(amount, dealDamageGA.Pierce);
                 // 荆棘：目标受击反弹施法者
                 if(caster != null && target.GetStatusEffectStacks(StatusEffectType.THORNS) > 0)
                     caster.Damage(target.GetStatusEffectStacks(StatusEffectType.THORNS));
-                // 吸血：施法者按比例回血（层数为百分比）
-                if(caster != null && caster.GetStatusEffectStacks(StatusEffectType.LIFESTEAL) > 0)
-                    caster.Heal(Mathf.RoundToInt(amount * caster.GetStatusEffectStacks(StatusEffectType.LIFESTEAL) / 100f));
+                // 吸血：施法者按比例回血（层数+血之契约光环为百分比）
+                int lifestealPct = (caster != null ? caster.GetStatusEffectStacks(StatusEffectType.LIFESTEAL) : 0)
+                                 + (caster != null ? caster.GetStatusEffectStacks(StatusEffectType.EXTRA_LIFESTEAL) : 0);
+                if(caster != null && lifestealPct > 0)
+                    caster.Heal(Mathf.RoundToInt(amount * lifestealPct / 100f));
             }
             if(r < reps - 1) yield return new WaitForSeconds(0.1f);
         }

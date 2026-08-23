@@ -10,24 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
-  m_Name: "盾击"
+  m_Name: "\u76FE\u51FB"
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: "造成6点伤害，每有1层格挡伤害+1"
-  <Mana>k__BackingField: 2
+  <Description>k__BackingField: "\u9020\u6210 6 \u70B9\u4F24\u5BB3\uFF0C\u5E76\u4F7F\u76EE\u6807\u6613\u4F24\u3002"
+  <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 0}
   <CardType>k__BackingField: 0
   <Exhaust>k__BackingField: 0
   <Retain>k__BackingField: 0
   <ManualTargetEffect>k__BackingField:
-    rid: 9160000000000000001
-  <OtherEffects>k__BackingField: []
+    rid: 7579569710059225203
+  <OtherEffects>k__BackingField:
+  - rid: 7579569710059225204
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 9160000000000000001
-      type: {class: ArmorDamageEffect, ns: , asm: Assembly-CSharp}
+    - rid: 7579569710059225203
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        baseDamage: 6
-        armorMult: 1.0
+        damageAmount: 6
+        hits: 1
+        pierce: 0
+    - rid: 7579569710059225204
+      type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
+      data:
+        <Effect>k__BackingField:
+          rid: 7579569710059225205
+        <TargetMode>k__BackingField:
+          rid: 7579569710059225206
+    - rid: 7579569710059225205
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 8
+        StackCount: 1
+    - rid: 7579569710059225206
+      type: {class: RandomEnemyTM, ns: , asm: Assembly-CSharp}
+      data: 

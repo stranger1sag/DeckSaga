@@ -52,16 +52,21 @@ public static class CardBuilder
     }
 
     // 通过反射设置嵌套 [SerializeReference] 字段（effect 的对象值）
+    // 字段可能为 property-backed `<X>k__BackingField`，或普通 private 字段，故合并搜索。
     private static void SetRefTree(object root, string propName, object value)
     {
-        var f = root.GetType().GetField(propName);
+        var f = root.GetType().GetField(propName,
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public)
+            ?? root.GetType().GetField("<" + propName + ">k__BackingField",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
         if(f != null) f.SetValue(root, value);
     }
 
     // 用反射设置 Effect 的具体字段（deal damage 的 amount / addstatus 的 type+stack 等）
     public static void SetEffectField(object effect, string field, object value)
     {
-        var f = effect.GetType().GetField(field);
+        var f = effect.GetType().GetField(field,
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
         if(f != null) f.SetValue(effect, value);
     }
 }

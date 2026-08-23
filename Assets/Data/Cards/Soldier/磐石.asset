@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
-  m_Name: "磐石"
+  m_Name: "\u78D0\u77F3"
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: "本回合每打出一张牌获得2点护甲"
+  <Description>k__BackingField: "\u83B7\u5F97 2 \u70B9\u654F\u6377\uFF08\u672C\u56DE\u5408\u6BCF\u5F97\u683C\u6321
+    +2\uFF09\u3002"
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 0}
   <CardType>k__BackingField: 1
@@ -21,24 +22,24 @@ MonoBehaviour:
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
-  - rid: 9170000000000000110
+  - rid: 7579569710059225188
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 9170000000000000110
+    - rid: 7579569710059225188
       type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
       data:
         <Effect>k__BackingField:
-          rid: 9170000000000000111
+          rid: 7579569710059225189
         <TargetMode>k__BackingField:
-          rid: 9170000000000000112
-    - rid: 9170000000000000111
+          rid: 7579569710059225190
+    - rid: 7579569710059225189
       type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusEffectType: 16
+        statusEffectType: 3
         StackCount: 2
-    - rid: 9170000000000000112
+    - rid: 7579569710059225190
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 

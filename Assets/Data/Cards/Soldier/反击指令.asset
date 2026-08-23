@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
-  m_Name: "反击指令"
+  m_Name: "\u53CD\u51FB\u6307\u4EE4"
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: "抽1张，获得3护甲"
+  <Description>k__BackingField: "\u83B7\u5F97 3 \u70B9\u683C\u6321\uFF0C\u62BD 1
+    \u5F20\u724C\u3002"
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 0}
   <CardType>k__BackingField: 1
@@ -21,39 +22,39 @@ MonoBehaviour:
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
-  - rid: 9100000000000001110
-  - rid: 9100000000000001115
+  - rid: 7579569710059225214
+  - rid: 7579569710059225217
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 9100000000000001110
+    - rid: 7579569710059225214
       type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
       data:
         <Effect>k__BackingField:
-          rid: 9100000000000001111
+          rid: 7579569710059225215
         <TargetMode>k__BackingField:
-          rid: 9100000000000001112
-    - rid: 9100000000000001111
-      type: {class: DrawCardsEffect, ns: , asm: Assembly-CSharp}
-      data:
-        drawAmount: 1
-    - rid: 9100000000000001112
-      type: {class: NoTM, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 9100000000000001115
-      type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
-      data:
-        <Effect>k__BackingField:
-          rid: 9100000000000001116
-        <TargetMode>k__BackingField:
-          rid: 9100000000000001117
-    - rid: 9100000000000001116
+          rid: 7579569710059225216
+    - rid: 7579569710059225215
       type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
         statusEffectType: 0
         StackCount: 3
-    - rid: 9100000000000001117
+    - rid: 7579569710059225216
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 7579569710059225217
+      type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
+      data:
+        <Effect>k__BackingField:
+          rid: 7579569710059225218
+        <TargetMode>k__BackingField:
+          rid: 7579569710059225219
+    - rid: 7579569710059225218
+      type: {class: DrawCardsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        drawAmount: 1
+    - rid: 7579569710059225219
+      type: {class: NoTM, ns: , asm: Assembly-CSharp}
       data: 

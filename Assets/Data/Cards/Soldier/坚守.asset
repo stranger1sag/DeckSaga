@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
-  m_Name: "坚守"
+  m_Name: "\u575A\u5B88"
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: "获得14点护甲，抽1张"
+  <Description>k__BackingField: "\u83B7\u5F97 14 \u70B9\u683C\u6321\uFF0C\u62BD 1
+    \u5F20\u724C\u3002"
   <Mana>k__BackingField: 2
   <Image>k__BackingField: {fileID: 0}
   <CardType>k__BackingField: 1
@@ -21,39 +22,39 @@ MonoBehaviour:
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
-  - rid: 9100000000000000210
-  - rid: 9100000000000000215
+  - rid: 7579569710059225182
+  - rid: 7579569710059225185
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 9100000000000000210
+    - rid: 7579569710059225182
       type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
       data:
         <Effect>k__BackingField:
-          rid: 9100000000000000211
+          rid: 7579569710059225183
         <TargetMode>k__BackingField:
-          rid: 9100000000000000212
-    - rid: 9100000000000000211
+          rid: 7579569710059225184
+    - rid: 7579569710059225183
       type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
         statusEffectType: 0
         StackCount: 14
-    - rid: 9100000000000000212
+    - rid: 7579569710059225184
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 9100000000000000215
+    - rid: 7579569710059225185
       type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
       data:
         <Effect>k__BackingField:
-          rid: 9100000000000000216
+          rid: 7579569710059225186
         <TargetMode>k__BackingField:
-          rid: 9100000000000000217
-    - rid: 9100000000000000216
+          rid: 7579569710059225187
+    - rid: 7579569710059225186
       type: {class: DrawCardsEffect, ns: , asm: Assembly-CSharp}
       data:
         drawAmount: 1
-    - rid: 9100000000000000217
+    - rid: 7579569710059225187
       type: {class: NoTM, ns: , asm: Assembly-CSharp}
       data: 

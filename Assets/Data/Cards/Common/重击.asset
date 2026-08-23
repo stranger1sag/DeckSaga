@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
   m_Name: "\u91CD\u51FB"
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: "\u9020\u621010\u70B9\u4F24\u5BB3"
+  <Description>k__BackingField: "\u9020\u6210 10 \u70B9\u4F24\u5BB3\u3002"
   <Mana>k__BackingField: 2
   <Image>k__BackingField: {fileID: 0}
   <CardType>k__BackingField: 0
   <Exhaust>k__BackingField: 0
   <Retain>k__BackingField: 0
   <ManualTargetEffect>k__BackingField:
-    rid: 9010000000000000001
+    rid: 7579569710059225172
   <OtherEffects>k__BackingField: []
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 9010000000000000001
+    - rid: 7579569710059225172
       type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
       data:
         damageAmount: 10
+        hits: 1
+        pierce: 0

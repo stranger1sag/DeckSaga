@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
   m_Name: "\u6218\u543C"
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: "\u62BD2\u5F20\u724C"
+  <Description>k__BackingField: "\u62BD 2 \u5F20\u724C\u3002"
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 0}
   <CardType>k__BackingField: 1
@@ -21,23 +21,23 @@ MonoBehaviour:
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
-  - rid: 9030000000000000002
+  - rid: 7579569710059225176
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 9030000000000000002
+    - rid: 7579569710059225176
       type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
       data:
         <Effect>k__BackingField:
-          rid: 9030000000000000003
+          rid: 7579569710059225177
         <TargetMode>k__BackingField:
-          rid: 9030000000000000004
-    - rid: 9030000000000000003
+          rid: 7579569710059225178
+    - rid: 7579569710059225177
       type: {class: DrawCardsEffect, ns: , asm: Assembly-CSharp}
       data:
         drawAmount: 2
-    - rid: 9030000000000000004
+    - rid: 7579569710059225178
       type: {class: NoTM, ns: , asm: Assembly-CSharp}
       data: 

@@ -25,4 +25,9 @@ public enum StatusEffectType
     DEPLETE,        // 枯竭：攻击力 -1/层(叠加)
     ON_PLAY_ARMOR,        // 出牌光环：每打出任意一张牌获得X护甲
     ON_ATTACK_PLAY_ARMOR, // 出牌光环：每打出一张攻击牌获得X护甲
+    // 能力牌(POWER)本场光环：每回合开始触发
+    PER_TURN_ARMOR,       // 本场：每回合开始 得X格挡（持久战意）
+    PER_TURN_STRENGTH,    // 本场：每回合开始 得X力量（狂血沸腾）
+    EXTRA_LIFESTEAL,      // 本场：每次命中敌人 额外+X吸血（血之契约）
+    PER_TURN_BURN,        // 本场：每回合开始 给所有敌 +X燃烧（灼热流转）
 }

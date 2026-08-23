@@ -10,35 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
-  m_Name: "盾墙"
+  m_Name: "\u76FE\u5899"
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: "获得8点护甲"
-  <Mana>k__BackingField: 1
+  <Description>k__BackingField: "\u83B7\u5F97 24 \u70B9\u683C\u6321\uFF08\u6D88\u8017\uFF09\u3002"
+  <Mana>k__BackingField: 2
   <Image>k__BackingField: {fileID: 0}
   <CardType>k__BackingField: 1
-  <Exhaust>k__BackingField: 0
+  <Exhaust>k__BackingField: 1
   <Retain>k__BackingField: 0
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
-  - rid: 9100000000000000110
+  - rid: 7579569710059225233
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 9100000000000000110
+    - rid: 7579569710059225233
       type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
       data:
         <Effect>k__BackingField:
-          rid: 9100000000000000111
+          rid: 7579569710059225234
         <TargetMode>k__BackingField:
-          rid: 9100000000000000112
-    - rid: 9100000000000000111
+          rid: 7579569710059225235
+    - rid: 7579569710059225234
       type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
         statusEffectType: 0
-        StackCount: 8
-    - rid: 9100000000000000112
+        StackCount: 24
+    - rid: 7579569710059225235
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 

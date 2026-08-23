@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37520d9441bc934a825f0d0cb29de74, type: 3}
   m_Name: "\u94C1\u58C1"
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: "\u83B7\u5F978\u70B9\u62A4\u7532"
+  <Description>k__BackingField: "\u83B7\u5F97 8 \u70B9\u683C\u6321\u3002"
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 0}
   <CardType>k__BackingField: 1
@@ -21,24 +21,24 @@ MonoBehaviour:
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
-  - rid: 9020000000000000002
+  - rid: 7579569710059225173
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 9020000000000000002
+    - rid: 7579569710059225173
       type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
       data:
         <Effect>k__BackingField:
-          rid: 9020000000000000003
+          rid: 7579569710059225174
         <TargetMode>k__BackingField:
-          rid: 9020000000000000004
-    - rid: 9020000000000000003
+          rid: 7579569710059225175
+    - rid: 7579569710059225174
       type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
         statusEffectType: 0
         StackCount: 8
-    - rid: 9020000000000000004
+    - rid: 7579569710059225175
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 

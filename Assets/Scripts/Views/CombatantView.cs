@@ -102,12 +102,12 @@ public class CombatantView : MonoBehaviour
             animator.Play(stateName, 0, normalizedTime);
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(int damageAmount, bool ignoreArmor = false)
     {
         int remainingDamage = damageAmount;
-        // 破甲：目标带 ARMOR_BREAK 时无视格挡
-        bool ignoreArmor = GetStatusEffectStacks(StatusEffectType.ARMOR_BREAK) > 0;
-        int currentArmor = ignoreArmor ? 0 : GetStatusEffectStacks(StatusEffectType.ARMOR);
+        // 破甲(ARMOR_BREAK 状态) 或 穿甲(显式 ignoreArmor) 时无视格挡
+        bool ignore = ignoreArmor || GetStatusEffectStacks(StatusEffectType.ARMOR_BREAK) > 0;
+        int currentArmor = ignore ? 0 : GetStatusEffectStacks(StatusEffectType.ARMOR);
         if (currentArmor > 0)
         {
             if(currentArmor >= remainingDamage)
