@@ -2929,6 +2929,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7751097283346505965, guid: 0ea306c503b0317498e33916b3088efe, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6959240526762826261, guid: 2f6c2ee984fcd35f38e1b1b5eb99a6dd, type: 3}
+    - target: {fileID: 7977318234920100824, guid: 0ea306c503b0317498e33916b3088efe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977318234920100824, guid: 0ea306c503b0317498e33916b3088efe, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

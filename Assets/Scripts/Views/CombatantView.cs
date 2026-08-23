@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
@@ -74,18 +73,12 @@ public class CombatantView : MonoBehaviour
         if(hpBarFill != null) hpBarFill.fillAmount = ratio;
     }
 
-    // 播放指定动画状态（Idle/Walk/Attack/Hurt/Death）；无 Animator 时忽略
+    // 播放指定动画状态；仅当存在 Animator 且该状态存在时才播放（怪物只有 Idle，避免报错）
     public void PlayAnimation(string stateName, float normalizedTime = 0f)
     {
         if(animator == null && spriteRenderer != null) animator = spriteRenderer.GetComponent<Animator>();
-        if(animator != null) animator.Play(stateName, 0, normalizedTime);
-    }
-
-    // 施法(攻击)动画：播 Attack，结束后回 Idle
-    public void PlayAttack()
-    {
-        PlayAnimation("Attack");
-        StartCoroutine(ReturnToIdle());
+        if(animator != null && animator.HasState(0, Animator.StringToHash(stateName)))
+            animator.Play(stateName, 0, normalizedTime);
     }
 
     public void Damage(int damageAmount)
@@ -109,16 +102,14 @@ public class CombatantView : MonoBehaviour
         if(CurrentHealth < 0) CurrentHealth = 0;
         transform.DOShakePosition(0.2f,0.5f);
         UpdateHealthUi();
-        // 动画：死亡显示 Death，否则显示 Hurt 后回 Idle
-        if(CurrentHealth <= 0) PlayAnimation("Death");
-        else { PlayAnimation("Hurt"); StartCoroutine(ReturnToIdle()); }
+        // 交给子类处理动画（英雄显示 Hurt/Death；怪物默认只有 Idle 不处理）
+        if(CurrentHealth <= 0) OnDied();
+        else OnDamaged();
     }
 
-    private IEnumerator ReturnToIdle()
-    {
-        yield return new WaitForSeconds(0.45f);
-        if(CurrentHealth > 0) PlayAnimation("Idle");
-    }
+    // 子类可重写：受伤/死亡动画。默认无操作（怪物只有 Idle）
+    protected virtual void OnDamaged() {}
+    protected virtual void OnDied() {}
     public void AddStatusEffect(StatusEffectType statusEffectType, int stackCount)
     {
         if(statusEffects.ContainsKey(statusEffectType))
