@@ -17,18 +17,17 @@ public class DamageSystem : MonoBehaviour
     {
         // 攻击动画在出牌流程(PlayCardPerformer)触发；此处不再播 caster 攻击动画
         // (避免反击/道具等以英雄为 caster 的伤害误播攻击动画)
+        // 同时结算：所有目标同一帧掉血+播放受伤动画（不再逐个 yield 等待）
+        foreach(var target in dealDamageGA.Targets)
+            target.Damage(dealDamageGA.Amount);
+        // 让受伤表现播一小会，再统一结算死亡
+        yield return new WaitForSeconds(0.2f);
         foreach(var target in dealDamageGA.Targets)
         {
-            target.Damage(dealDamageGA.Amount);
-            //Instantiate(DamageVFX, target.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(0.15f);
-            if(target.CurrentHealth <= 0)
+            if(target.CurrentHealth <= 0 && target is EnemyView enemyView)
             {
-                if(target is EnemyView enemyView)
-                {
-                    KillEnemyGA killEnemyGA = new(enemyView);
-                    ActionSystem.Instance.AddReaction(killEnemyGA);
-                }
+                KillEnemyGA killEnemyGA = new(enemyView);
+                ActionSystem.Instance.AddReaction(killEnemyGA);
             }
         }
     }
