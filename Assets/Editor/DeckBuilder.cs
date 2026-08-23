@@ -23,6 +23,13 @@ public static class DeckBuilder
         CardBuilder.SetEffectField(e, "armorMult", armorMult);
         return e;
     }
+    public static StrengthDamageEffect StrengthDmg(int baseDamage, float strengthMult)
+    {
+        var e = new StrengthDamageEffect();
+        CardBuilder.SetEffectField(e, "baseDamage", baseDamage);
+        CardBuilder.SetEffectField(e, "strengthMult", strengthMult);
+        return e;
+    }
     public static AddStatusEffectEffect Status(StatusEffectType t, int stack)
     {
         var e = new AddStatusEffectEffect();
@@ -43,9 +50,23 @@ public static class DeckBuilder
     public static readonly NoTM None = new();
     public static readonly RandomEnemyTM RandomEnemy = new();
 
+    // 确保资产目录存在（逐级创建 Assets/.../xxx）
+    public static void EnsureFolder(string folder)
+    {
+        if(AssetDatabase.IsValidFolder(folder)) return;
+        string current = "";
+        foreach(var seg in folder.Split('/'))
+        {
+            current = current.Length == 0 ? seg : current + "/" + seg;
+            if(!AssetDatabase.IsValidFolder(current))
+                AssetDatabase.CreateFolder(System.IO.Path.GetDirectoryName(current).Replace('\\','/'), System.IO.Path.GetFileName(current));
+        }
+    }
+
     // 构建一张卡：手动目标效果 + 若干自动目标效果
     public static void Build(string name, int mana, CardType type, string desc, string folder, Effect manual = null, List<(Effect, TargetMode)> autos = null, bool exhaust = false, bool retain = false)
     {
+        EnsureFolder(folder);
         string path = folder + "/" + name + ".asset";
         var existing = AssetDatabase.LoadAssetAtPath<CardData>(path);
         var data = existing != null ? existing : CardBuilder.CreateCard(name, mana, type, desc, null, folder);

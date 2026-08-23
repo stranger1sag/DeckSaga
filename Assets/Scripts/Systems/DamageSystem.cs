@@ -24,10 +24,18 @@ public class DamageSystem : MonoBehaviour
             {
                 int amount = dealDamageGA.Amount;
                 CombatantView caster = dealDamageGA.Caster;
-                if(caster != null)
+                // 施法者加成（力量/怒气/下张攻击/虚弱）仅在未预烘焙时由管线追加（力量类/护甲类效果已把缩放算进Amount）
+                if(caster != null && dealDamageGA.IncludeCasterBonuses)
                 {
                     amount += caster.GetStatusEffectStacks(StatusEffectType.STRENGTH)
                             + caster.GetStatusEffectStacks(StatusEffectType.FURY);
+                    // 下张攻击加成：仅首段命中加值并消耗
+                    if(r == 0 && caster.GetStatusEffectStacks(StatusEffectType.NEXT_ATTACK_BONUS) > 0)
+                    {
+                        amount += caster.GetStatusEffectStacks(StatusEffectType.NEXT_ATTACK_BONUS);
+                        caster.RemoveStatusEffect(StatusEffectType.NEXT_ATTACK_BONUS,
+                            caster.GetStatusEffectStacks(StatusEffectType.NEXT_ATTACK_BONUS));
+                    }
                     if(caster.GetStatusEffectStacks(StatusEffectType.WEAK) > 0)
                         amount = Mathf.RoundToInt(amount * 0.75f);
                 }

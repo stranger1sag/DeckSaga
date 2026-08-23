@@ -12,6 +12,6 @@ public class ArmorDamageEffect : Effect
     {
         int armor = caster != null ? caster.GetStatusEffectStacks(StatusEffectType.ARMOR) : 0;
         int damage = baseDamage + Mathf.RoundToInt(armor * armorMult);
-        return new DealDamageGA(damage, targets, caster);
+        return new DealDamageGA(damage, targets, caster, 1, false, false);
     }
 }

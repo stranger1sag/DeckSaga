@@ -9,6 +9,7 @@ public static class DeckContent
 {
     const string Common = "Assets/Data/Cards/Common";
     const string Soldier = "Assets/Data/Cards/Soldier";
+    const string Orc = "Assets/Data/Cards/Orc";
 
     [MenuItem("Tools/DeckSaga/Build Common Pool")]
     public static void BuildCommon()
@@ -63,5 +64,50 @@ public static class DeckContent
             new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.PER_TURN_ARMOR,2), DeckBuilder.Hero) });
         AssetDatabase.SaveAssets();
         Debug.Log("[DeckBuilder] Soldier 池构建完成");
+    }
+
+    [MenuItem("Tools/DeckSaga/Build Orc Deck")]
+    public static void BuildOrc()
+    {
+        // §3.2 狂怒兽人（不含重复的公共6张）
+        DeckBuilder.Build("重斩", 2, CardType.ATTACK, "造成 12 点伤害。", Orc, DeckBuilder.Deal(12));
+        DeckBuilder.Build("咆哮", 1, CardType.SKILL, "获得 2 点力量。", Orc, new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.STRENGTH,2), DeckBuilder.Hero) });
+        DeckBuilder.Build("力量挥击", 1, CardType.ATTACK, "造成 4 点伤害，获得 2 点力量。", Orc,
+            DeckBuilder.Deal(4), new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.STRENGTH,2), DeckBuilder.Hero) });
+        DeckBuilder.Build("血性", 0, CardType.SKILL, "损失 2 点生命，获得 2 点格挡。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Sacrifice(2), DeckBuilder.Hero), (DeckBuilder.Status(StatusEffectType.ARMOR,2), DeckBuilder.Hero) });
+        DeckBuilder.Build("血怒", 1, CardType.SKILL, "损失 3 点生命，获得 3 点力量。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Sacrifice(3), DeckBuilder.Hero), (DeckBuilder.Status(StatusEffectType.STRENGTH,3), DeckBuilder.Hero) });
+        DeckBuilder.Build("裂地", 2, CardType.ATTACK, "造成 4×2 点伤害。", Orc, DeckBuilder.Deal(4, 2));
+        DeckBuilder.Build("疯狗连咬", 1, CardType.ATTACK, "造成 2×3 点伤害。", Orc, DeckBuilder.Deal(2, 3));
+        DeckBuilder.Build("连斩", 1, CardType.ATTACK, "造成 3×2 点伤害。", Orc, DeckBuilder.Deal(3, 2));
+        DeckBuilder.Build("碎骨", 1, CardType.ATTACK, "造成 5 点伤害，并使目标易伤。", Orc,
+            DeckBuilder.Deal(5), new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.VULNERABLE,1), DeckBuilder.RandomEnemy) });
+        DeckBuilder.Build("破甲", 1, CardType.ATTACK, "造成 6 点伤害，无视格挡。", Orc, DeckBuilder.Deal(6, 1, true));
+        DeckBuilder.Build("蛮力", 2, CardType.SKILL, "损失 4 点生命，获得 1 点能量。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Sacrifice(4), DeckBuilder.Hero), (DeckBuilder.Mana(1), DeckBuilder.None) });
+        DeckBuilder.Build("强健", 1, CardType.SKILL, "回复 4 点生命。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(4), DeckBuilder.Hero) });
+        DeckBuilder.Build("抽牌", 1, CardType.SKILL, "抽 2 张牌。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Draw(2), DeckBuilder.None) });
+        DeckBuilder.Build("斗鱼猛攻", 2, CardType.ATTACK, "造成 2×3 点伤害，抽 1 张牌。", Orc,
+            DeckBuilder.Deal(2, 3), new List<(Effect,TargetMode)>{ (DeckBuilder.Draw(1), DeckBuilder.None) });
+        DeckBuilder.Build("狂野冲撞", 2, CardType.ATTACK, "造成 8 点伤害（力量>3 时 +6）。", Orc, DeckBuilder.Deal(8));
+        DeckBuilder.Build("怒不可遏", 2, CardType.SKILL, "本回合每张攻击牌+4 伤害。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.FURY,4), DeckBuilder.Hero) });
+        DeckBuilder.Build("血勇", 1, CardType.ATTACK, "造成 6 点伤害。", Orc, DeckBuilder.Deal(6));
+        DeckBuilder.Build("兽人本能", 1, CardType.SKILL, "抽 2 张牌，获得 1 点力量。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Draw(2), DeckBuilder.None), (DeckBuilder.Status(StatusEffectType.STRENGTH,1), DeckBuilder.Hero) });
+        DeckBuilder.Build("嗜血渴望", 1, CardType.SKILL, "损失 2 点生命，下张攻击牌+4 伤害。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Sacrifice(2), DeckBuilder.Hero), (DeckBuilder.Status(StatusEffectType.NEXT_ATTACK_BONUS,4), DeckBuilder.Hero) });
+        DeckBuilder.Build("狂暴化", 3, CardType.SKILL, "本场力量 +5（消耗）。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.STRENGTH,5), DeckBuilder.Hero) }, exhaust: true);
+        DeckBuilder.Build("嗜血战刃", 3, CardType.ATTACK, "每点力量造成 2 点伤害，打全体。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.StrengthDmg(0, 2), DeckBuilder.AllEnemies) });
+        DeckBuilder.Build("万兽狂潮", 2, CardType.ATTACK, "造成 2×(力量+3) 点伤害。", Orc, DeckBuilder.StrengthDmg(6, 2));
+        DeckBuilder.Build("狂血沸腾", 2, CardType.POWER, "本场每回合开始获得 1 点力量。", Orc,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.PER_TURN_STRENGTH,1), DeckBuilder.Hero) });
+        AssetDatabase.SaveAssets();
+        Debug.Log("[DeckBuilder] Orc 池构建完成");
     }
 }
