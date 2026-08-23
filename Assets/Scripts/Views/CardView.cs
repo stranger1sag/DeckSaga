@@ -14,6 +14,15 @@ public class CardView : MonoBehaviour
     public Card Card { get; private set; }
     private Vector3 dragStartPosition;
     private Quaternion dragStartRotation;
+
+    // 保证拖拽射线能射到棋盘(DropArea层); 防止预制体 dropLayer 被重置回0导致自动目标卡出不了牌
+    private void Awake()
+    {
+        int board = LayerMask.NameToLayer("DropArea");
+        if(board < 0) board = 6;
+        dropLayer = 1 << board;
+    }
+
     public void Setup(Card card)
     {
         Card = card;
