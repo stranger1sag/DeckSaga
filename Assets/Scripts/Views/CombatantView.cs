@@ -102,7 +102,9 @@ public class CombatantView : MonoBehaviour
     public void Damage(int damageAmount)
     {
         int remainingDamage = damageAmount;
-        int currentArmor = GetStatusEffectStacks(StatusEffectType.ARMOR);
+        // 破甲：目标带 ARMOR_BREAK 时无视格挡
+        bool ignoreArmor = GetStatusEffectStacks(StatusEffectType.ARMOR_BREAK) > 0;
+        int currentArmor = ignoreArmor ? 0 : GetStatusEffectStacks(StatusEffectType.ARMOR);
         if (currentArmor > 0)
         {
             if(currentArmor >= remainingDamage)
@@ -132,6 +134,15 @@ public class CombatantView : MonoBehaviour
     // 子类可重写：受伤/死亡动画。默认无操作（怪物只有 Idle）
     protected virtual void OnDamaged() {}
     protected virtual void OnDied() {}
+
+    // 回复生命（吸血/治疗用），不超过上限
+    public void Heal(int amount)
+    {
+        if(amount <= 0) return;
+        CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
+        UpdateHealthUi();
+    }
+
     public void AddStatusEffect(StatusEffectType statusEffectType, int stackCount)
     {
         if(statusEffects.ContainsKey(statusEffectType))

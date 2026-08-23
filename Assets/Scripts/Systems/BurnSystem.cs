@@ -16,9 +16,10 @@ public class BurnSystem : MonoBehaviour
     private IEnumerator ApplyBurnPerformer(ApplyBurnGA applyBurnGA)
     {
         CombatantView combatantView = applyBurnGA.Target;
-        //Instantiate(burnVFX, combatantView.transform.position, Quaternion.identity);
         combatantView.Damage(applyBurnGA.BurnDamage);
-        combatantView.RemoveStatusEffect(StatusEffectType.BURN,1);
+        // BURN 回合末减层；POISON 不减(持续掉)
+        if(applyBurnGA.Type == StatusEffectType.BURN)
+            combatantView.RemoveStatusEffect(StatusEffectType.BURN,1);
         yield return new WaitForSeconds(1f);
     }
 }

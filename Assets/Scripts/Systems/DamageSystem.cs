@@ -15,11 +15,29 @@ public class DamageSystem : MonoBehaviour
     }
     private IEnumerator DealDamagePerformer(DealDamageGA dealDamageGA)
     {
-        // 攻击动画在出牌流程(PlayCardPerformer)触发；此处不再播 caster 攻击动画
-        // (避免反击/道具等以英雄为 caster 的伤害误播攻击动画)
-        // 同时结算：所有目标同一帧掉血+播放受伤动画（不再逐个 yield 等待）
+        // 伤害管线：基础伤害 -> (施法者力量/虚弱) -> (目标易伤) -> 结算
+        // 同时结算所有目标；荆棘(目标)反击施法者；施法者吸血回血。
         foreach(var target in dealDamageGA.Targets)
-            target.Damage(dealDamageGA.Amount);
+        {
+            int amount = dealDamageGA.Amount;
+            CombatantView caster = dealDamageGA.Caster;
+            if(caster != null)
+            {
+                amount += caster.GetStatusEffectStacks(StatusEffectType.STRENGTH);
+                if(caster.GetStatusEffectStacks(StatusEffectType.WEAK) > 0)
+                    amount = Mathf.RoundToInt(amount * 0.75f);
+            }
+            if(target.GetStatusEffectStacks(StatusEffectType.VULNERABLE) > 0)
+                amount = Mathf.RoundToInt(amount * 1.5f);
+            if(amount < 0) amount = 0;
+            target.Damage(amount);
+            // 荆棘：目标受击反弹施法者
+            if(caster != null && target.GetStatusEffectStacks(StatusEffectType.THORNS) > 0)
+                caster.Damage(target.GetStatusEffectStacks(StatusEffectType.THORNS));
+            // 吸血：施法者按比例回血（层数为百分比）
+            if(caster != null && caster.GetStatusEffectStacks(StatusEffectType.LIFESTEAL) > 0)
+                caster.Heal(Mathf.RoundToInt(amount * caster.GetStatusEffectStacks(StatusEffectType.LIFESTEAL) / 100f));
+        }
         // 让受伤表现播一小会，再统一结算死亡
         yield return new WaitForSeconds(0.2f);
         foreach(var target in dealDamageGA.Targets)

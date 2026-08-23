@@ -37,6 +37,12 @@ public class EnemySystem : Singleton<EnemySystem>
                 ApplyBurnGA applyBurnGA = new(enemyView, BurnStacks);
                 ActionSystem.Instance.AddReaction(applyBurnGA);
             }
+            int PoisonStacks = enemyView.GetStatusEffectStacks(StatusEffectType.POISON);
+            if(PoisonStacks>0)
+            {
+                ApplyBurnGA poisonGA = new(enemyView, PoisonStacks, StatusEffectType.POISON);
+                ActionSystem.Instance.AddReaction(poisonGA);
+            }
             AttackHeroGA attackGA = new(enemyView);
             ActionSystem.Instance.AddReaction(attackGA);
         }

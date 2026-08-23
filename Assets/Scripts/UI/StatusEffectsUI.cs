@@ -35,7 +35,8 @@ public class StatusEffectsUI : MonoBehaviour
         {
             StatusEffectType.ARMOR => armorSprite,
             StatusEffectType.BURN => burnSprite,
-            _ => null
+            // 新状态效果：暂无独立图标，先用 burnSprite 顶替，后续补
+            _ => burnSprite
         };
     }
 }
