@@ -269,6 +269,14 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3110277552409690668, guid: 9d36f22cc60fa4442948f150877150b0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110277552409690668, guid: 9d36f22cc60fa4442948f150877150b0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3318486306680848665, guid: 9d36f22cc60fa4442948f150877150b0, type: 3}
       propertyPath: m_FlipX
       value: 1
