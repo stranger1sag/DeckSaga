@@ -118,7 +118,11 @@ public class CombatantView : MonoBehaviour
         }
         CurrentHealth -= remainingDamage;
         if(CurrentHealth < 0) CurrentHealth = 0;
-        transform.DOShakePosition(0.2f,0.5f);
+        // 受击击退：向远离攻击者方向（怪物在右→向右，英雄在左→向左）移动一小段，再回到原位
+        Vector3 origPos = transform.position;
+        float knockDir = Mathf.Sign(transform.position.x);
+        if(knockDir == 0f) knockDir = 1f;
+        transform.DOMoveX(origPos.x + knockDir * 0.6f, 0.12f).OnComplete(() => transform.DOMoveX(origPos.x, 0.12f));
         UpdateHealthUi();
         // 交给子类处理动画（英雄显示 Hurt/Death；怪物默认只有 Idle 不处理）
         if(CurrentHealth <= 0) OnDied();
