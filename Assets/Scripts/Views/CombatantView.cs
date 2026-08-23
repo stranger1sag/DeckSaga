@@ -16,6 +16,8 @@ public class CombatantView : MonoBehaviour
 
     // 血条世界高度（与胶囊贴图原生高度一致，保持两端半圆）；宽度在 Setup 时按角色贴图算
     private const float HPBarHeight = 0.42f;
+    // 血条宽度左右留白系数（更宽更舒展，角色/怪物通用）
+    private const float HPBarWidthPadding = 1.15f;
     private float hpBarWidth = 1.8f;
 
     // 杀戮尖塔式：暗底 + 红色血条
@@ -35,8 +37,9 @@ public class CombatantView : MonoBehaviour
         spriteRenderer.sprite = image;
         ResolveHealthBar();
         // 宽度与角色实际可视宽度一致（用紧致alpha宽度去掉透明空白，避免Sprite外围空白把血条撑宽）
+        // 左右再留一点缓冲（更宽更舒展）
         if(spriteRenderer != null && spriteRenderer.sprite != null)
-            hpBarWidth = GetTightWidth(spriteRenderer.sprite) * spriteRenderer.transform.lossyScale.x;
+            hpBarWidth = GetTightWidth(spriteRenderer.sprite) * spriteRenderer.transform.lossyScale.x * HPBarWidthPadding;
         LayoutHealthBar();
         UpdateHealthUi();
     }
