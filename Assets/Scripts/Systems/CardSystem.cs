@@ -90,7 +90,9 @@ public class CardSystem : Singleton<CardSystem>
         if(OnCardPlayed != null && HeroSystem.Instance != null && HeroSystem.Instance.HeroView != null)
             OnCardPlayed(playedCard, HeroSystem.Instance.HeroView);
 
-        SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
+        // 出牌费用(应用下一张牌的费用减免)
+        int cost = Mathf.Max(0, playCardGA.Card.Mana - (ManaSystem.Instance != null ? ManaSystem.Instance.ConsumeCostDiscount() : 0));
+        SpendManaGA spendManaGA = new(cost);
         ActionSystem.Instance.AddReaction(spendManaGA);
         if(playCardGA.Card.ManualTargetEffect != null)
         {

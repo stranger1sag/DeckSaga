@@ -7,6 +7,7 @@ public class ManaSystem : Singleton<ManaSystem>
     [SerializeField] private ManaUI manaUI;
     private const int MAX_MANA = 3;
     private int currentMana = MAX_MANA;
+    private int costDiscount = 0;   // 下一张牌的减免费用(用完即消耗)
     private void Start()
     {
         manaUI.UpdateMana(currentMana);
@@ -16,6 +17,7 @@ public class ManaSystem : Singleton<ManaSystem>
         ActionSystem.AttachPerformer<SpendManaGA>(SpendManaPerformer);
         ActionSystem.AttachPerformer<RefillManaGA>(RefillManaPerformer);
         ActionSystem.AttachPerformer<GainManaGA>(GainManaPerformer);
+        ActionSystem.AttachPerformer<CostReductionGA>(CostReductionPerformer);
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
     void OnDisable()
@@ -23,11 +25,20 @@ public class ManaSystem : Singleton<ManaSystem>
         ActionSystem.DetachPerformer<SpendManaGA>();
         ActionSystem.DetachPerformer<RefillManaGA>();
         ActionSystem.DetachPerformer<GainManaGA>();
+        ActionSystem.DetachPerformer<CostReductionGA>();
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
     public bool HasEnoughMana(int amount)
     {
         return currentMana >= amount;
+    }
+    public void AddCostDiscount(int amount) { costDiscount += amount; }
+    // 返回下一张牌的减免并消耗
+    public int ConsumeCostDiscount()
+    {
+        int d = costDiscount;
+        costDiscount = 0;
+        return d;
     }
     private IEnumerator SpendManaPerformer(SpendManaGA spendManaGA)
     {
@@ -45,6 +56,11 @@ public class ManaSystem : Singleton<ManaSystem>
     {
         currentMana = Mathf.Min(MAX_MANA, currentMana + gainManaGA.Amount);
         manaUI.UpdateMana(currentMana);
+        yield return null;
+    }
+    private IEnumerator CostReductionPerformer(CostReductionGA costReductionGA)
+    {
+        costDiscount += costReductionGA.Amount;
         yield return null;
     }
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
