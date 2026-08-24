@@ -154,6 +154,12 @@ public static class DeckContent
             DeckBuilder.Deal(10), new List<(Effect,TargetMode)>{ (DeckBuilder.Heal(10), DeckBuilder.Hero) }, exhaust: true);
         DeckBuilder.Build("血之契约", 2, CardType.POWER, "本场每次命中敌人额外 +1 吸血。", Blood,
             new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.EXTRA_LIFESTEAL,1), DeckBuilder.Hero) });
+        DeckBuilder.Build("剔伐", 2, CardType.SKILL, "删除一张手牌，回复 6 点生命。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.RemoveFromDeck(1), DeckBuilder.None), (DeckBuilder.Heal(6), DeckBuilder.Hero) });
+        DeckBuilder.Build("精血", 1, CardType.SKILL, "删除一张牌，抽 2 张牌。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.RemoveFromDeck(1), DeckBuilder.None), (DeckBuilder.Draw(2), DeckBuilder.None) });
+        DeckBuilder.Build("血液凝滞", 1, CardType.SKILL, "本回合免受自伤。", Blood,
+            new List<(Effect,TargetMode)>{ (DeckBuilder.Status(StatusEffectType.NO_SELF_DAMAGE,1), DeckBuilder.Hero) });
         AssetDatabase.SaveAssets();
         Debug.Log("[DeckBuilder] Blood 池构建完成");
     }

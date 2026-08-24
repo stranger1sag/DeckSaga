@@ -26,7 +26,11 @@ public class HealSystem : MonoBehaviour
     private IEnumerator SacrificePerformer(SacrificeGA sacrificeGA)
     {
         foreach(var target in sacrificeGA.Targets)
+        {
+            // 免自伤本回合：有 NO_SELF_DAMAGE 时不损失生命（代价被抵消）
+            if(target.GetStatusEffectStacks(StatusEffectType.NO_SELF_DAMAGE) > 0) continue;
             target.Damage(sacrificeGA.Amount);
+        }
         yield return null;
     }
     private IEnumerator RemoveDebuffPerformer(RemoveDebuffGA removeDebuffGA)

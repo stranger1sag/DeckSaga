@@ -20,12 +20,31 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
+        ActionSystem.AttachPerformer<RemoveFromDeckGA>(RemoveFromDeckPerformer);
     }
     void OnDisable()
     {
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
         ActionSystem.DetachPerformer<PlayCardGA>();
+        ActionSystem.DetachPerformer<RemoveFromDeckGA>();
+    }
+
+    // 删牌：从手牌随机移除 count 张并销毁其卡面
+    private IEnumerator RemoveFromDeckPerformer(RemoveFromDeckGA removeFromDeckGA)
+    {
+        for(int i = 0; i < removeFromDeckGA.Count && hand.Count > 0; i++)
+        {
+            int idx = Random.Range(0, hand.Count);
+            Card card = hand[idx];
+            hand.RemoveAt(idx);
+            if(handView != null)
+            {
+                CardView cardView = handView.RemoveCard(card);
+                if(cardView != null) Destroy(cardView.gameObject);
+            }
+        }
+        yield return null;
     }
 
     //publics

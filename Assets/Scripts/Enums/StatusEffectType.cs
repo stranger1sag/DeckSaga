@@ -31,4 +31,5 @@ public enum StatusEffectType
     EXTRA_LIFESTEAL,      // 本场：每次命中敌人 额外+X吸血（血之契约）
     PER_TURN_BURN,        // 本场：每回合开始 给所有敌 +X燃烧（灼热流转）
     NEXT_ATTACK_BONUS,    // 下张攻击牌 伤害+X（嗜血渴望）
+    NO_SELF_DAMAGE,       // 本回合免自伤（血液凝滞）
 }

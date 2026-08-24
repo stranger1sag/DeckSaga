@@ -36,6 +36,8 @@ public class HeroSystem : Singleton<HeroSystem>
         if(fury > 0) HeroView.RemoveStatusEffect(StatusEffectType.FURY, fury);
         int dex = HeroView.GetStatusEffectStacks(StatusEffectType.DEXTERITY);
         if(dex > 0) HeroView.RemoveStatusEffect(StatusEffectType.DEXTERITY, dex);
+        int nsd = HeroView.GetStatusEffectStacks(StatusEffectType.NO_SELF_DAMAGE);
+        if(nsd > 0) HeroView.RemoveStatusEffect(StatusEffectType.NO_SELF_DAMAGE, nsd);
         foreach (var turnBuff in new StatusEffectType[]{StatusEffectType.ON_PLAY_ARMOR, StatusEffectType.ON_ATTACK_PLAY_ARMOR}) {
             int s = HeroView.GetStatusEffectStacks(turnBuff);
             if(s > 0) HeroView.RemoveStatusEffect(turnBuff, s);
